@@ -1,0 +1,223 @@
+;; load emacs 24's package system. Add MELPA repository.
+;; ____________________________________________________________________________
+;; Aquamacs custom-file warning:
+;; Warning: After loading this .emacs file, Aquamacs will also load
+;; customizations from `custom-file' (customizations.el). Any settings there
+;; will override those made here.
+;; Consider moving your startup settings to the Preferences.el file, which
+;; is loaded after `custom-file':
+;; ~/Library/Preferences/Aquamacs Emacs/Preferences
+;; _____________________________________________________________________________
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(package-initialize)
+(eval-when-compile
+  ;; Following line is not needed if use-package.el is in ~/.emacs.d
+
+  (require 'use-package))
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(setq inhibit-startup-screen t)
+;; key bindings
+;;(when (eq system-type 'darwin) ;; mac specific settings
+;;  (setq mac-function-modifier 'meta)
+;;  (setq mac-command-modifier 'hyper)
+;;)
+
+;; this is to theoretically keep packages synced between machines
+(require 'use-package-ensure)
+(setq use-package-always-ensure t)
+
+(setq initial-scratch-message "Let's do something cool!!!") ;; Uh, I know what Scratch is for
+(setq visible-bell t)             ;; Get rid of the beeps
+
+
+;;random enviroment set up and stuff i dont know where to put it
+(setq custom-safe-themes t)
+;; default to better frame titles
+(setq frame-title-format
+      (concat  "%b - emacs@" (system-name)))
+
+;; default to unified diffs
+(setq diff-switches "-u")
+
+;;this add some prefered org-mode settings. I should be convert this to a use package to keep it clean
+(add-hook 'org-mode-hook 'org-indent-mode)
+(add-hook 'org-mode-hook 'visual-line-mode)
+
+;; this load the theme
+(load-theme 'monokai t)
+;;(load-theme 'cyberpunk)
+(setq transient-mark-mode t)
+
+;;this is for all the helm stuff which makes looking for files easier
+(use-package helm
+  :bind (("C-x C-f" . helm-find-files)
+	 ("M-x" . helm-M-x)
+	 ("C-c C-a" . helm-apropos)
+  :map helm-map
+   ("C-j" . helm-next-line)
+   ("C-k" . helm-previous-line))
+
+  :config
+  (helm-mode 1))
+
+;;this a autocomplete package
+(use-package company
+   :init (setq ess-use-company t)
+   :hook (after-init . global-company-mode)
+   :config
+   (setq company-selection-wrap-around t
+      company-tooltip-align-annotations t
+      company-idle-delay 0.36
+      company-minimum-prefix-length 2
+      company-tooltip-limit 10)
+   (with-eval-after-load 'company
+     (define-key company-active-map [return] nil)
+     (define-key company-active-map [tab] 'company-complete-common)
+     (define-key company-active-map (kbd "TAB") 'company-complete-common)
+     (define-key company-active-map (kbd "M-TAB") 'company-complete-selection))
+)
+;   :bind
+;         ("C-i" . company-indent-or-complete-common)
+;         ("C-M-i" . completion-at-point)))
+
+;;this improves jumping between windows
+(use-package ace-window
+  :bind (("C-x o" . ace-window)))
+
+
+;;change window configurations
+(use-package winner
+  :ensure t
+  :init (winner-mode 1))
+
+;;this is a different terminal. maybe faster im not sure
+(use-package vterm
+  :load-path  "/Users/Eric/.emacs.d/elpa/vterm-20200121.102/"
+)
+
+;;improve jumping around on page
+(use-package ace-jump-mode
+  :bind (("C-c SPC" . ace-jump-mode))
+  ;; :hook (prog-mode . ace-jump-mode)
+         ;; (text-mode . ace-jump-mode)))
+)
+
+;;this is for looking at pdfs in emacs
+(use-package pdf-tools
+  :ensure t
+  :config
+  (custom-set-variables
+    '(pdf-tools-handle-upgrades nil)) ; Use brew upgrade pdf-tools instead.
+  (setq pdf-info-epdfinfo-program "/usr/local/bin/epdfinfo"))
+(pdf-tools-install)
+
+;;improves markdown mode
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode))
+  :init (setq markdown-command "/usr/local/bin/multimarkdown"))
+
+;;for emacs ess
+(use-package ess
+  :config
+  (setq ess-use-company t)
+  (setq ess-use-auto-complete t))
+
+;;this makes terminal managment better 
+(use-package sane-term
+  :ensure t
+  :bind (
+    ("C-x t" . sane-term)
+    ("C-x T" . sane-term-create)))
+
+;;set workgroups
+(use-package workgroups2
+  :ensure t
+  :diminish workgroups-mode
+  :init
+  (setq wg-prefix-key (kbd "C-c a")
+        wg-session-file "~/.emacs.d/workgroups2"
+        wg-mode-line-display-on nil
+        ;; What to do on Emacs exit / workgroups-mode exit?
+        wg-emacs-exit-save-behavior           'save      ; Options: 'save 'ask nil
+        wg-workgroups-mode-exit-save-behavior 'save)
+  ;;  (workgroups-mode 1)
+  )
+;; the following will have to be cleaned up when i have time at a later date
+
+
+;; (add-hook 'eshell-mode-hook
+;;           (lambda ()
+;;             (eshell-cmpl-initialize)
+;;             (define-key eshell-mode-map [remap eshell-pcomplete] 'helm-esh-pcomplete)
+;;             (define-key eshell-mode-map (kbd "M-p") 'helm-eshell-history)))
+;; Load emacs 24's package system. Add MELPA repository.
+
+;;; company
+(require 'company)
+(setq tab-always-indent 'complete)
+
+(setq company-idle-delay 0.5
+      company-show-numbers t
+      company-minimum-prefix-length 2
+      company-tooltip-flip-when-above t)
+
+(global-set-key (kbd "C-M-/") #'company-complete)
+(global-company-mode)
+
+;;; ESS
+(defun my-ess-hook ()
+  ;; ensure company-R-library is in ESS backends
+  (make-local-variable 'company-backends)
+  (cl-delete-if (lambda (x) (and (eq (car-safe x) 'company-R-args))) company-backends)
+  (push (list 'company-R-args 'company-R-objects 'company-R-library :separate)
+        company-backends))
+
+(add-hook 'ess-mode-hook 'my-ess-hook)
+
+(with-eval-after-load 'ess
+  (setq ess-use-company t))
+;;    (require 'simpleclip)
+;;    (simpleclip-mode 1)
+
+
+
+;;(require 'package)
+
+
+;;this should give me clipboard copy and paste functionality
+;;(load-file "~/.emacs.d/emacs-for-python/epy-init.el")
+;;(package-initialize)
+;;(elpy-enable)
+;;(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+;; '(package-selected-packages (quote (magit md4rd helm ess-R-data-view elpy ace-window))))
+;;(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ ;;)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (workgroups2 sane-term vterm-toggle vterm helm-mt multi-term pdf-tools which-key use-package try monokai-theme md4rd markdown-mode magit helm ess-R-data-view elpy ace-window ace-jump-mode)))
+ '(pdf-tools-handle-upgrades nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

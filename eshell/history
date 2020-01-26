@@ -1,0 +1,121 @@
+~/Applications/netchop-3.1/netchop 
+~/Applications/netchop-3.1/netchop ~/Eric/pep_prediction/HPV16fasta.txt 
+~/Applications/netchop-3.1/netchop ~/Eric/pep_prediction/HPV16fasta.txt > netchoptest.output
+~/Applications/netchop-3.1/netchop ~/Eric/pep_prediction/HPV16fasta.txt > netchoptest.output
+~/Applications/netchop-3.1/netchop ~/Eric/pep_prediction/HPV16fasta.txt > netchoptest.output
+~/Applications/netchop-3.1/netchop ~/Eric/pep_prediction/HPV16fasta.txt > netchoptest.output -s
+~/Applications/netchop-3.1/netchop ~/Eric/pep_prediction/HPV16fasta.txt > netchoptest.output -v 1
+rm wget-log 
+ls
+cd ..
+ls
+cd computing_misc/
+ls
+cd ..
+cd mutation_test/
+ls
+cat outputfrotest.csv | column -s","
+ls
+cat README.md 
+cat README.md | less
+ls
+ls
+cd Applications/
+ls
+pwd
+ls
+ls
+ls
+ls
+cd ..
+ls
+cd DDA/
+ls
+cd ..
+mv mgf/
+cd mgf/
+ls
+cd ..
+cd ..
+ls
+cd ..
+cd MSMS_otherpapers/carr/
+ls
+cat docker_centroid.sh 
+cd ../../DIA_ritz/HEK/
+ls
+cd raw/
+ls
+cd ..
+cp raw/*30B* DDA/
+cd DDA/
+ls
+mv ../raw/dockerconver.sh .
+cat dockerconver.sh 
+bash dockerconver.sh 
+ls
+scp *raw $hpc~
+scp *mzML $hpc~
+cd ../../Dropbox\ \(ASU\)/
+ls
+mkdir computaitonal_immunology_datasets
+cd computaitonal_immunology_datasets/
+ls
+mkdir MS_data
+mkdir peptide_data
+mkdir structures
+ls
+mkdir RNAseq_data
+cd ..
+ls
+mv computaitonal_immunology_datasets/ comp_immuno_data/
+ls
+cd comp_immuno_data/
+ls
+ls
+ls
+mkdir scripts
+cd scripts/
+date
+echo date 
+echo $(date) 
+echo `date` 
+date | sed 's/ /_/g' 
+a=date | sed 's/ /_/g'
+date | sed 's/ /_/g'
+a=`date | sed 's/ /_/g'`
+a=`date | sed 's/ /_/g '`
+date | sed 's/ /_/g '
+date | sed 's/ /_/g '
+date | sed 's/ /_/g '
+a=\(date | sed 's/ /_/g')
+a=date | sed 's/ /_/g'
+a=$(date)
+echo $a
+a=$(date)
+find . -name "mut*.pdb"
+bash str.sh 
+bash str.sh 
+bash str.sh 
+bash str.sh 
+bash str.sh 
+bash str.sh 
+bash str.sh 
+bash str.sh 
+bash str.sh 
+bash str.sh 
+bash str.sh 
+bash str.sh 
+bash str.sh 
+bash str.sh 
+bash str.sh 
+bash str.sh 
+bash str.sh 
+bash str.sh 
+ls
+bash load_allpdbs.tcl 
+ls
+grep
+cat outputfrotest.csv | head
+cat Q1.csv | head
+cat Q1.csv | grep 8e-04

@@ -52,6 +52,10 @@
 ;;(load-theme 'cyberpunk)
 (setq transient-mark-mode t)
 
+
+
+
+
 ;;this is for all the helm stuff which makes looking for files easier
 (use-package helm
   :bind (("C-x C-f" . helm-find-files)
@@ -185,6 +189,14 @@
 ;;    (require 'simpleclip)
 ;;    (simpleclip-mode 1)
 
+
+
+;; term line mode toggle
+
+(define-key term-raw-map (kbd "S-j") 'term-line-mode)
+(define-key term-mode-map (kbd "S-j") 'term-char-mode)
+(setq mac-command-modifier 'super)
+(setq mac-function-modifier 'hyper)
 
 
 ;;(require 'package)

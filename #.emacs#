@@ -238,6 +238,3 @@ active process."
 (global-set-key (kbd "<M-return>") 'tws-region-to-process)
 
 
-(define-key org-mode-map (kbd "M-<RET>") nil) ; remove old binding
-(define-key org-mode-map (kbd "<s-return>") 'org-insert-heading) 
-(put 'upcase-region 'disabled nil)
